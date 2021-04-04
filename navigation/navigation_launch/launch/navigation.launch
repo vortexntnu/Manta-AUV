@@ -3,24 +3,11 @@
 
   <!-- Navigation for real AUV -->
   <group if="$(eval type == 'real')">
-    
-    <group if="$(eval localization == 'ekf')">
-      
-      <!-- Kalman filter -->
-      <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+
+    <!-- Kalman filter -->
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
         <rosparam command="load" file="$(find robot_localization)/params/pooltestnovember.yaml" />
-      </node>
-
-    </group>
-
-    <group if="$(eval localization == 'eskf')">
-      
-      <!-- Error State Kalman Filter-->
-      <node pkg="eskf" type="eskf" name="eskf_localization_node" clear_params="true" output="screen">
-	      <rosparam file="$(find eskf)/apps/ros/parameters/pooltest2021_params.yaml" /> 
-      </node>
-
-    </group>
+    </node>
 
   </group>
 
@@ -29,10 +16,10 @@
 
     <!-- Underwater odometry -->
     <rosparam command="load" file="$(find underwater_odom)/param/environment_config.yaml" />
-    <node pkg="underwater_odom" type="underwater_odom_node" name="underwater_odom_node" output="screen"/>
+    <node pkg="underwater_odom" type="underwater_odom_node" name="underwater_odom_node" output="screen" respawn="true" respawn_delay="2"/>
     
     <!-- Kalman filter -->
-    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true" respawn="true" respawn_delay="2">
       <rosparam command="load" file="$(find robot_localization)/params/dvl_ekf_template.yaml" />
     </node>
 
