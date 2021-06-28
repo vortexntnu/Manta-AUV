@@ -20,10 +20,10 @@
  * odometry publisher. Positions in x and y are estimated by euler integration.
  *
  */
-class MclabOdom
+class SimpleOdom
 {
 public:
-  MclabOdom(ros::NodeHandle nh);
+  SimpleOdom(ros::NodeHandle nh);
   void spin();
 
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
