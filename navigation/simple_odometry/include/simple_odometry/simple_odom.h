@@ -20,28 +20,32 @@
  * odometry publisher. Positions in x and y are estimated by euler integration.
  *
  */
-class MclabOdom
+class SimpleOdom
 {
 public:
-  MclabOdom(ros::NodeHandle nh);
+  SimpleOdom(ros::NodeHandle nh);
   void spin();
 
-  EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 private:
   void imuCallback(const sensor_msgs::Imu& imu_msg);
   void dvlCallback(const geometry_msgs::TwistWithCovarianceStamped& twist_msg);
   void mocapCallback(const geometry_msgs::PoseStamped& msg);
+
   Eigen::Vector3d position;
   tf2::Quaternion orientation;
+
   tf2::Vector3 linear_vel;
   tf2::Vector3 angular_vel;
+
   tf2::Quaternion imu_rotation;
   tf2::Quaternion dvl_rotation;
   tf2::Vector3 dvl_translation;
+
   ros::Subscriber imu_sub;
   ros::Subscriber dvl_sub;
   ros::Subscriber mocap_sub;
   ros::Publisher odom_pub;
+  
   ros::NodeHandle nh;
   double update_rate;
 };

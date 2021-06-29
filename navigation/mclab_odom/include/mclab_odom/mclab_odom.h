@@ -1,5 +1,5 @@
-#ifndef SIMPLE_ODOM_H
-#define SIMPLE_ODOM_H
+#ifndef MCLAB_ODOM_H
+#define MCLAB_ODOM_H
 
 #include <ros/ros.h>
 #include <ros/console.h>
@@ -20,10 +20,10 @@
  * odometry publisher. Positions in x and y are estimated by euler integration.
  *
  */
-class SimpleOdom
+class MclabOdom
 {
 public:
-  SimpleOdom(ros::NodeHandle nh);
+  MclabOdom(ros::NodeHandle nh);
   void spin();
 
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW

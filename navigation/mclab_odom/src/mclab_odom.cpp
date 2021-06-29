@@ -1,4 +1,4 @@
-#include "mclab_odometry/mclab_odom.h"
+#include "mclab_odom/mclab_odom.h"
 
 MclabOdom::MclabOdom(ros::NodeHandle nh) : nh(nh)
 {

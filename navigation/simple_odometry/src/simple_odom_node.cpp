@@ -1,4 +1,4 @@
-#include "simple_odom.h"
+#include "simple_odometry/simple_odom.h"
 
 int main(int argc, char** argv)
 {
