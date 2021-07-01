@@ -4,6 +4,9 @@
   <!-- Depth estimation -->
   <node pkg="depth_estimator" type="depth_estimator_node" name="depth_estimator" output="screen" ns="localization" />
 
+  <!-- Odometry decomposer -->
+  <node pkg="odometry_decomposer" type="odometry_decomposer_node" name="odometry_decomposer" output="screen" ns="localization"/>
+
   <!-- Kalman filter -->
   <group if="$(eval localization == 'ekf')">
     
