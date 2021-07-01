@@ -166,7 +166,7 @@ void ESKF_Node::dvlCallback(const geometry_msgs::TwistWithCovarianceStamped::Con
   // Publish DVL - NIS
   nav_msgs::Odometry odom_msg;
   static size_t trace_id{ 0 };
-  odom_msg.header.frame_id = "/eskf_link";
+  odom_msg.header.frame_id = "/odom";// "/eskf_link";
   odom_msg.header.seq = trace_id++;
   odom_msg.header.stamp = ros::Time::now();
   odom_msg.pose.pose.position.x = eskf_.getNISDVL();
@@ -204,7 +204,7 @@ void ESKF_Node::pressureZCallback(const std_msgs::Float64::ConstPtr& depth_msg)
   // Publish Pressure Z - NIS
   nav_msgs::Odometry odom_msg;
   static size_t trace_id{ 0 };
-  odom_msg.header.frame_id = "/eskf_link";
+  odom_msg.header.frame_id = "/odom";//"/eskf_link";
   odom_msg.header.seq = trace_id++;
   odom_msg.header.stamp = ros::Time::now();
   odom_msg.pose.pose.position.x = eskf_.getNISPressureZ();
@@ -239,7 +239,7 @@ void ESKF_Node::publishPoseState(const ros::TimerEvent&)
   attitude_error_covariance.setZero();
   attitude_error_covariance = errorCovariance.block<3, 3>(6, 6);
 
-  imu_biases_and_gravity.header.frame_id = "/eskf_link";
+  imu_biases_and_gravity.header.frame_id = "/odom"; //"/eskf_link";
   imu_biases_and_gravity.header.seq = trace_id++;
   imu_biases_and_gravity.header.stamp = ros::Time::now();
   imu_biases_and_gravity.pose.pose.position.x = accbias(0);
@@ -254,7 +254,7 @@ void ESKF_Node::publishPoseState(const ros::TimerEvent&)
 
   publishAccGyrobiasandGravity_.publish(imu_biases_and_gravity);
 
-  odom_msg.header.frame_id = "/eskf_link";
+  odom_msg.header.frame_id = "/odom"; // "/eskf_link";
   odom_msg.header.seq = trace_id++;
   odom_msg.header.stamp = ros::Time::now();
   odom_msg.pose.pose.position.x = position(StateMemberX);  // NEDpose(StateMemberX);
